@@ -1,0 +1,58 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <link rel="stylesheet" href="/style.css">
+    <title>Document</title>
+</head>
+<body>
+    <h1>Registration Form</h1>
+    <p>Please fill out this form with the required information</p>
+    <form action='/register' method="post">
+      <fieldset>
+        <label>First Name: <input type="text" name="first_name" required /></label>
+        <label>Last Name: <input type="text" name="last_name" required /></label>
+        <label>Nationality: <input type="text" name="nationality" required /></label>
+        <label>City: <input type="text" name="city" required /></label>
+      </fieldset>
+      <fieldset>
+  
+        <!-- <label>Upload a profile picture: <input type="file" name="file" /></label> -->
+        <label>Age (years): <input type="number" name="age" min="15" max="120" />
+			  </label>
+        <label>Work Staus?
+          <select name="referrer">
+            <option value="">(select one)</option>
+            <option value="1">Student</option>
+            <option value="2">Employed</option>
+            <option value="3">Unemployed</option>
+            <option value="4">Other</option>
+          </select>
+        </label> <br> <br>
+        <label>Interested Tech Field?:
+          <select name="referrer">
+            <option value="">(select one)</option>
+            <option value="1">FrontEnd</option>
+            <option value="2">BackEnd</option>
+            <option value="3">FullStack</option>
+            <option value="4">Data Analytics</option>
+            <option value="5">Cyber Security</option>
+            <option value="6">Database Managment(DBM)</option>
+            <option value="7">Graphic Design</option>
+
+          </select>
+      </fieldset>
+      <fieldset>
+        <label>Username: <input type="text" name="username"/></label>
+        <label>Email: <input type="email" name="email" required /></label>
+        <label>Create Password: <input type="password" name="password" pattern="[a-z0-5]{8,}" required /></label>
+        <label>Confirm Password: <input type="password" name="password" pattern="[a-z0-5]{8,}" required /></label>
+      </fieldset>
+      <input type="submit" value="Submit" />
+    </form>
+</body>
+</html>
+
