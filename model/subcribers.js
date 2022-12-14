@@ -1,6 +1,7 @@
 const mongoose = require('mongoose')
 const bcrypt = require('bcryptjs')
 const validator = require('validator')
+const jwt = require('jsonwebtoken')
 
 const subcriberSchema = mongoose.Schema ({
     first_name : {
@@ -44,7 +45,23 @@ const subcriberSchema = mongoose.Schema ({
     }
 })
 
+subcriberSchema.pre('save', async function (){
+    const salt = await bcrypt.genSalt(10)
+    this.password = await bcrypt.hash(this.password, salt)
+    this.confirmPassword = undefined
+})
 
+subcriberSchema.methods.comparePasswords = async function (userPassword) {
+    const isMatch = await bcrypt.compare(userPassword, this.password)
+    return isMatch
+}
+
+subcriberSchema.methods.createJWT = function () {
+    return jwt.sign({
+        id : this._id, username : this.username},
+        process.env.JWT_secret,
+        {expiresIn : process.env.JWT_EXPIRES})
+}
 
 
 module.exports = mongoose.model('Subcribers', subcriberSchema)
