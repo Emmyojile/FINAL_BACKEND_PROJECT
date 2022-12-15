@@ -11,7 +11,10 @@ exports.loginPage = (req, res) => {
 }
 
 exports.dashboardPage = (req, res) => {
-    return res.render('dashboard', {title : "DASHBOARD", layout : "dash2" })
+    const token = req.cookies.token
+    const payload = jwt.verify(token, process.env.JWT_SECRET)
+    const username = payload.username.toString().toLocaleUpperCase()
+    return res.render('dashboard', {title : "DASHBOARD", layout : "dash2", msg : username })
 }
 
 exports.aboutPage = (req, res) =>{
@@ -48,6 +51,30 @@ exports.register = async  (req, res) => {
 
     const newUser = await Subscribers.create({...req.body})
     const token = newUser.createJWT()
+
+    const nodemailer = require('nodemailer')
+
+    const transport = nodemailer.createTransport({
+        service : 'gmail',
+        auth : {
+            user : process.env.email,
+            pass : process.env.password
+        }
+    })
+
+    const mailoptions = {
+        from : 'emmaojile99@gmail.com',
+        to : req.body.email,
+        subject : 'GREETINGS',
+        html : '<h1>Thank You For Choosing OJ-TECH'
+    }
+
+    transport.sendMail(mailoptions, (err, info) => {
+        if (err) {
+            console.log(err)
+        }
+        console.log(info)
+    })
 
     res.cookie('token', token, {httpOnly : true, secure : false})
     // console.log(token)
