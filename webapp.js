@@ -21,6 +21,9 @@ app.engine('handlebars', engine());
 app.set('view engine', 'handlebars');
 app.set('views', './views');
 
+app.get("/", (req, res) => {
+    res.sendFile(path.join(__dirname, './public', 'home.html'));
+})
 app.use('/', router)
 
 const start = async () => {

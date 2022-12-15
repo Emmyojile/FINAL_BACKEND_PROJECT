@@ -7,7 +7,7 @@ exports.registerPage = (req, res) => {
 }
 
 exports.loginPage = (req, res) => {
-    return res.render('login', {title : "LOGIN"})
+    return res.render('login', {title : "LOGIN", layout : "main2"})
 }
 
 exports.dashboardPage = (req, res) => {
