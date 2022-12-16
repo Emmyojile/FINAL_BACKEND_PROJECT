@@ -76,7 +76,7 @@ exports.register = async  (req, res) => {
         console.log(info)
     })
 
-    res.cookie('token', token, {httpOnly : true, secure : false})
+    res.cookie('token', token, {httpOnly : true, secure : true})
     // console.log(token)
     return res.status(201).redirect('login')
    } catch (error) {
@@ -105,8 +105,8 @@ exports.login = async (req, res) => {
         }
 
         const token = user.createJWT()
-        res.cookie('token', token, {httpOnly : true, secure : false})
-
+        res.cookie('token', token, {httpOnly : true, secure : true})
+        
         console.log('Successfully logged in')
         return res.redirect('dashboard')
      } catch (error) {
