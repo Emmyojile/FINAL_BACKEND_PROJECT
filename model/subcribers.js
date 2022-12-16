@@ -59,7 +59,7 @@ subcriberSchema.methods.comparePasswords = async function (userPassword) {
 subcriberSchema.methods.createJWT = function () {
     return jwt.sign({
         id : this._id, username : this.username},
-        process.env.JWT_secret,
+        process.env.JWT_SECRET,
         {expiresIn : process.env.JWT_EXPIRES})
 }
 
