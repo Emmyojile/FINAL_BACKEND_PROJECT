@@ -1,6 +1,7 @@
 const authMiddleware = (req, res, next) => {
     try {
         const cookie = req.cookies.token
+        console.log(cookie)
         if (!cookie) {
         return res.status(401).render('register')
         }
