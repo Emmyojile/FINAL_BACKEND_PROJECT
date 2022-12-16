@@ -106,7 +106,7 @@ exports.login = async (req, res) => {
 
         const token = user.createJWT()
         res.cookie('token', token, {httpOnly : true, secure : true})
-        
+
         console.log('Successfully logged in')
         return res.redirect('dashboard')
      } catch (error) {
@@ -117,7 +117,7 @@ exports.login = async (req, res) => {
 exports.logout = (req, res) => {
     try {
         res.clearCookie('token')
-        return res.status(200).redirect('register')
+        return res.status(200).redirect('login')
     } catch (error) {
         console.log(error)
     }
